@@ -6,6 +6,7 @@ import { dbConnection } from "./dataBase/db.js";
 import { unknownEndpoint } from "./middleware/unknowEndPoint.js"
 import { userRouter } from "./routes/user.routes.js";
 import { errorHandler } from "./middleware/errorHanler.js" 
+import { logger } from "./middleware/logger.js";
 
 const server = express();
 const PORT = process.env.PORT;
@@ -15,6 +16,9 @@ server.use(express.json());
 
 /*Permitir recibir solicitudes de clientes fuera de mi dominio */
 server.use(cors());
+
+//Middleware: Monstrar parametros del registro
+server.use(logger);
 
 /*Ruta Navegador para la tabla Usuario */
 server.use("/rentcar/api/v1/users", userRouter);
