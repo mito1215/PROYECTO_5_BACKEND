@@ -51,7 +51,7 @@ export const postUser = async (request, response, next) => {
         //Responder con el estatus 201 y los datos del usuario
         //response.status(201).json(newUser);
         //Responder solo con el estatus 201
-        response.status(201).end();
+        response.status(201).json("User created successfully");
     }   catch (error) {
         // console.log(error.name);
         // console.log(error.message);
