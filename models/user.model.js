@@ -3,15 +3,14 @@ import bcrypt from 'bcrypt';
 
 //Crear SCHEMA o esquema de la tabla usuario
 const userSchema = new mongoose.Schema({
-    DNI: { type: Number, required: true},
+    DNI: { type: String, required: true},
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     birthdate: { type: Date, required: true },
     role: { type: String, required: true },
-    cellPhoone: { type: Number, required: true },
+    cellPhoone: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    avatar: {type: String, required: false},
     userName: { type: String, required: true }
 });
 
