@@ -29,7 +29,7 @@ export const getUserId = async (request, response, next) => {
 export const postUser = async (request, response, next) => {
     try {
         //Definir variables de usuario
-        const {DNI, firstName, lastName, birthdate, role, cellPhoone, email, password, userName} = request.body;
+        const {DNI, firstName, lastName, birthdate, role, cellPhone, email, password, userName} = request.body;
     
         const userProps = {
             DNI,
@@ -37,7 +37,7 @@ export const postUser = async (request, response, next) => {
             lastName,
             birthdate,
             role,
-            cellPhoone,
+            cellPhone,
             email,
             password,
             userName

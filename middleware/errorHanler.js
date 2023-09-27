@@ -1,5 +1,6 @@
 //Errores de usuario
 export function  errorHandler (error, request, response, next) {
+    console.log(error.stack);
     //usamos console.log() para mostrar como se llama el error
     console.log("EL ERROR ES ",error.name)
     //con el if() manejamos el error y le asignamos el estatus 400
