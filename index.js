@@ -5,6 +5,7 @@ import 'dotenv/config.js'
 import { dbConnection } from "./dataBase/db.js";
 import { unknownEndpoint } from "./middleware/unknowEndPoint.js"
 import { userRouter } from "./routes/user.routes.js";
+import { carRouter } from "./routes/car.routes.js";
 import { errorHandler } from "./middleware/errorHanler.js" 
 import { logger } from "./middleware/logger.js";
 
@@ -22,6 +23,9 @@ server.use(logger);
 
 /*Ruta Navegador para la tabla Usuario */
 server.use("/rentcar/api/v1/users", userRouter);
+
+/*Ruta Navegador para la tabla Vehiculo */
+server.use("/rentcar/api/v1/cars", carRouter);
 
 //Ruta basica para probar que esta levantada la api
 server.use(

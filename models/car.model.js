@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 //Crear SCHEMA o esquema de la tabla Car
 const carSchema = new mongoose.Schema({
-    carRegister: {type: Number, require: true},
+    carRegister: {type: String, require: true},
     carBrand: {type: String, require: true},
     carLine: {type: String, require: true},
     carModel: {type: Number, require: true},

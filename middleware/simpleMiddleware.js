@@ -39,3 +39,36 @@ export const simpleMiddleware = (request, response, next) => {
         next();
     }
 }
+
+//Validacion tabla Vehiculos
+export const simpleMiddlewareCar = (request, response, next) => {
+    console.log("Ingresando al middleware ✔");
+
+    //Definir variables de usuario
+    const {carRegister, carBrand, carLine, carModel, carColor, carFuel} = request.body;
+
+    //Definir reglas
+    const schema = Joi.object({
+        carRegister: Joi.string().required(),
+        carBrand: Joi.string().required(),
+        carLine: Joi.string().required(),
+        carModel: Joi.number().required(),
+        carColor: Joi.string().required(),
+        carFuel: Joi.string().required(),
+    });
+    //Validar reglas
+    const valueRules = schema.validate({
+        carRegister: carRegister,
+        carBrand: carBrand,
+        carLine: carLine,
+        carModel: carModel,
+        carColor: carColor,
+        carFuel: carFuel
+    });
+
+    if (valueRules.error) {
+        response.status(500).json(valueRules.error)
+    } else {
+        next();
+    }
+}
