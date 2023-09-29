@@ -1,48 +1,47 @@
-import { Car } from "../models/car.model.js";
+import { stockCar } from "../models/stockCar.model.js";
 
 //Obtener datos
-export const getCar = async (request, response) => {
-    console.log("Ingresando al controlador de Vehiculos ✔");
-    const cars = await Car.find({});
+export const getStockCar = async (request, response) => {
+    console.log("Ingresando al controlador de StockCar ✔");
+    const stockCars = await stockCar.find({});
     //Mostrar el status 200 y los usuarios
-    response.status(200).json(cars);
+    response.status(200).json(stockCars);
 }
 
 //Obtener datos por id
-export const getCarId = async (request, response, next) => {
+export const getStockCarId = async (request, response, next) => {
     //Utilizamos un trycatch para manejar el error cuando no se ingresa bien un id
     try {
         const id = request.params.id;
-        const carFound = await Car.findById(id);
+        const stockCarFound = await Car.findById(id);
 
-        if (!carFound) {
+        if (!stockCarFound) {
             return response.status(404).end();
         }
-        response.status(200).json(carFound);
+        response.status(200).json(stockCarFound);
     } catch (error) {
         next(error);
     }
 }
 
 //Crear Vehiculo
-export const postCar = async (request, response, next) => {
+export const postStockCar = async (request, response, next) => {
     try {
         //Definir variables de vehiculo
-        const { carRegister, carBrand, carLine, carModel, carColor, carFuel } = request.body;
+        const { carBrand, carLine, carModel, carAmount, carPriceRent } = request.body;
 
         const userProps = {
-            carRegister,
             carBrand,
             carLine,
             carModel,
-            carColor,
-            carFuel
+            carAmount,
+            carPriceRent
         };
         //Primera forma de crear documentos
         // const newUser = new User(userProps);
         // await newUser.save();
         //Segunda forma de crear documentos
-        await Car.create(userProps);
+        await stockCar.create(userProps);
         //Responder con el estatus 201 y los datos del usuario
         //response.status(201).json(newUser);
         //Responder solo con el estatus 201
@@ -56,7 +55,7 @@ export const postCar = async (request, response, next) => {
 }
 
 //Actualizar campos de registro
-export const updateCar = async(request, response, next) => {
+export const updateStockCar = async(request, response, next) => {
     try {
         const id = request.params.id;
         const userNewProps = request.body;
@@ -72,12 +71,12 @@ export const updateCar = async(request, response, next) => {
 }
 
 //Eliminar registro
-export const deleteCar = async(request, response, next) =>{
+export const deleteStockCars = async(request, response, next) =>{
     try {
         const id = request.params.id;
-        const deleteCar = await Car.findByIdAndRemove(id).exec();
+        const deleteStockCar = await Car.findByIdAndRemove(id).exec();
 
-        if(!deleteCar) {
+        if(!deleteStockCar) {
             return response.status(404).end();
         }
         //Definir un 204 ignorara y no enviara ninguna respuesta la cliente si se pone .json o send.

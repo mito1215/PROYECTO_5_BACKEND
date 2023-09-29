@@ -72,3 +72,34 @@ export const simpleMiddlewareCar = (request, response, next) => {
         next();
     }
 }
+
+//Validacion tabla StockCar
+export const simpleMiddlewareStockCar = (request, response, next) => {
+    console.log("Ingresando al middleware Stock Car ✔");
+
+    //Definir variables de stock car
+    const {carBrand, carLine, carModel, carAmount, carPriceRent} = request.body;
+
+    //Definir reglas
+    const schema = Joi.object({
+        carBrand: Joi.string().required(),
+        carLine: Joi.string().required(),
+        carModel: Joi.number().required(),
+        carAmount: Joi.number().required(),
+        carPriceRent: Joi.number().required(),
+    });
+    //Validar reglas
+    const valueRules = schema.validate({
+        carBrand: carBrand,
+        carLine: carLine,
+        carModel: carModel,
+        carAmount: carAmount,
+        carPriceRent: carPriceRent
+    });
+
+    if (valueRules.error) {
+        response.status(500).json(valueRules.error)
+    } else {
+        next();
+    }
+}
