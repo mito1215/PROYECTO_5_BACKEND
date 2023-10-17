@@ -1,7 +1,6 @@
 import { Router } from "express";
+import { deleteStockCars, getStockCar, getStockCarId, postStockCar, updateStockCar } from "../controllers/stockCar.controller.js";
 import { simpleMiddlewareStockCar } from "../middleware/simpleMiddleware.js";
-import { upload } from "../middleware/upload.js";
-import { getStockCar, getStockCarId, postStockCar, updateStockCar,deleteStockCars } from "../controllers/stockCar.controller.js";
 export const stockCarRouter = Router();
 
 //ROUTES

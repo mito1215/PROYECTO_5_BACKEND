@@ -1,14 +1,14 @@
-import express from "express";
 import cors from "cors";
-import 'dotenv/config.js'
-
+import 'dotenv/config.js';
+import express from "express";
 import { dbConnection } from "./dataBase/db.js";
-import { unknownEndpoint } from "./middleware/unknowEndPoint.js"
-import { userRouter } from "./routes/user.routes.js";
-import { carRouter } from "./routes/car.routes.js";
-import { stockCarRouter } from "./routes/stockCar.routes.js"
-import { errorHandler } from "./middleware/errorHanler.js" 
+import { errorHandler } from "./middleware/errorHanler.js";
 import { logger } from "./middleware/logger.js";
+import { unknownEndpoint } from "./middleware/unknowEndPoint.js";
+import { carRouter } from "./routes/car.routes.js";
+import { rentCarRouter } from "./routes/rentCar.routes.js";
+import { stockCarRouter } from "./routes/stockCar.routes.js";
+import { userRouter } from "./routes/user.routes.js";
 
 const server = express();
 const PORT = process.env.PORT;
@@ -30,6 +30,9 @@ server.use("/rentcar/api/v1/cars", carRouter);
 
 /*Ruta Navegador para la tabla Stock Car */
 server.use("/rentcar/api/v1/stock", stockCarRouter);
+
+/*Ruta Navegador para la tabla Rent Car */
+server.use("/rentcar/api/v1/rent", rentCarRouter);
 
 //Ruta basica para probar que esta levantada la api
 server.use(

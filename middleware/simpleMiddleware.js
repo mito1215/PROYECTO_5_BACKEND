@@ -1,5 +1,4 @@
 //ejemplo de midleware
-import { request, response } from "express";
 import Joi from "joi";
 
 export const simpleMiddleware = (request, response, next) => {
@@ -95,6 +94,40 @@ export const simpleMiddlewareStockCar = (request, response, next) => {
         carModel: carModel,
         carAmount: carAmount,
         carPriceRent: carPriceRent
+    });
+
+    if (valueRules.error) {
+        response.status(500).json(valueRules.error)
+    } else {
+        next();
+    }
+}
+
+//Validacion tabla rentCar
+export const simpleMiddlewareRentCar = (request, response, next) => {
+    console.log("Ingresando al middleware Rent Car ✔");
+
+    //Definir variables de stock car
+    const {customer, employee, carRegister, carPriceRent, startDate, FinishDate} = request.body;
+
+    //Definir reglas
+    const schema = Joi.object({
+        customer: Joi.string().required(),
+        employee: Joi.string().required(),
+        carRegister: Joi.number().required(),
+        carPriceRent: Joi.number().required(),
+        startDate: Joi.date().required(),
+        FinishDate: Joi.date().required(),
+
+    });
+    //Validar reglas
+    const valueRules = schema.validate({
+        customer: customer,
+        employee: employee,
+        carRegister: carRegister,
+        carPriceRent: carPriceRent,
+        startDate: startDate,
+        FinishDate: FinishDate
     });
 
     if (valueRules.error) {
