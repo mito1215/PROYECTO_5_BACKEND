@@ -1,5 +1,5 @@
+import bcryptjs from 'bcryptjs';
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt';
 
 //Crear SCHEMA o esquema de la tabla usuario
 const userSchema = new mongoose.Schema({
@@ -25,14 +25,14 @@ userSchema.set('toJSON', {
 //Encriptar password
 userSchema.methods.encryptPassword = async (password) => {
     const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hash = await bcrypt.hash(password, salt);
+    const salt = await bcryptjs.genSalt(saltRounds);
+    const hash = await bcryptjs.hash(password, salt);
 
     return hash;
 }
 
 userSchema.methods.validatePassword = function (password) {
-    return bcrypt.compare(password, this.password);
+    return bcryptjs.compare(password, this.password);
 }
 
 //USER MODEL o Crear la coleccion
