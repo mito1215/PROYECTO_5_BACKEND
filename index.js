@@ -1,7 +1,7 @@
 import cors from "cors";
 import 'dotenv/config.js';
 import express from "express";
-import { dbConnection } from "./dataBase/db.js";
+import { dbConnection } from "./database/db.js";
 import { errorHandler } from "./middleware/errorHanler.js";
 import { logger } from "./middleware/logger.js";
 import { unknownEndpoint } from "./middleware/unknowEndPoint.js";
